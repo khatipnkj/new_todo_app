@@ -13,7 +13,7 @@ function App() {
 
     const q = query(collection(db, "todos"))
     const unsub = onSnapshot(q, (querySnapshot) => {
-      setTodos(querySnapshot.docs.map(doc => doc.data().todo));
+      setTodos(querySnapshot.docs.map(doc => ({id: doc.id, todo:doc.data().todo})));
     });
     // db.collection('todos').onSnapshot(snapshot => {
     //   console.log(snapshot.docs.map(doc => doc.data().todo))
@@ -56,7 +56,7 @@ function App() {
 
       <ul>
         {todos.map((todo) => (
-          <Todo text={todo}/>
+          <Todo todo={todo}/>
         ))}
       </ul>
     </div>
